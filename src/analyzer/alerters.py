@@ -23,12 +23,13 @@ metric: information about the anomaly itself
 def alert_smtp(alert, metric):
 
     # For backwards compatibility
+    server = settings.SMTP_OPTS['server']
+    port = settings.SMTP_OPTS['port']
+    
     if '@' in alert[1]:
         sender = settings.ALERT_SENDER
         recipient = alert[1]
     else:
-        server = settings.SMTP_OPTS['server']
-        port = settings.SMTP_OPTS['port']
         sender = settings.SMTP_OPTS['sender']
         recipients = settings.SMTP_OPTS['recipients'][alert[0]]
 
